@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { Upload, CheckCircle, XCircle, Loader2, Image as ImageIcon, Brain, Zap, Target } from 'lucide-react'
 import axios from 'axios'
+import { config } from '@/lib/config'
 
 interface PredictionResult {
   label: string
@@ -64,7 +65,7 @@ export function ImageAnalysis() {
       const formData = new FormData()
       formData.append('file', selectedFile)
 
-      const response = await axios.post('http://localhost:8001/predict-image/', formData, {
+      const response = await axios.post(`${config.apiUrl}/predict-image/`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Activity, AlertTriangle, CheckCircle, Loader2, TrendingUp, TrendingDown, Brain, Zap, Database, Cpu } from 'lucide-react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import axios from 'axios'
+import { config } from '@/lib/config'
 
 interface SensorData {
   vibration: number
@@ -50,7 +51,7 @@ export function SensorMonitoring() {
     setError(null)
 
     try {
-      const response = await axios.post('http://localhost:8001/predict-sensor/', sensorData)
+      const response = await axios.post(`${config.apiUrl}/predict-sensor/`, sensorData)
       const result = response.data
       setResult(result)
 

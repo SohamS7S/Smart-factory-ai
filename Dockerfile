@@ -3,7 +3,8 @@ FROM python:3.9-slim
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    PORT=8001
 
 # Set work directory
 WORKDIR /app
@@ -24,6 +25,10 @@ RUN pip install --no-cache-dir --upgrade pip \
 
 # Copy project files
 COPY . .
+
+# Create non-root user for security
+RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
+USER appuser
 
 # Expose port (adjust if your app runs on another port)
 EXPOSE 8001

@@ -1,206 +1,119 @@
-# 🏭 Smart Factory AI Platform
+# Smart Factory AI Platform
 
-A comprehensive AI-powered quality control and anomaly detection system for modern manufacturing, featuring advanced computer vision and deep learning technologies.
+Advanced AI-powered quality control and anomaly detection system built with cutting-edge computer vision and deep learning technologies.
 
-## 🚀 Live Demo
+## 🚀 Features
 
-**Frontend**: [Coming Soon - Vercel Deployment]  
-**Backend API**: [Coming Soon - Railway Deployment]
-
-## ✨ Features
-
-### 🤖 AI Capabilities
 - **Computer Vision AI**: CNN model with 98.2% accuracy for defect detection
-- **Sensor Analytics**: LSTM autoencoder with 96.7% anomaly detection accuracy
-- **Real-time Processing**: Sub-second inference times
+- **Sensor Analytics**: LSTM Autoencoder for predictive maintenance
+- **Real-time Processing**: Sub-second inference capabilities
 - **Production Ready**: Containerized deployment with Docker
-
-### 🎨 Professional UI/UX
-- **Modern Dark Theme**: Purple/emerald color scheme with glassmorphism effects
-- **Responsive Design**: Works perfectly on all devices
-- **Interactive Dashboards**: Real-time charts and visualizations
-- **Professional Animations**: Smooth transitions and hover effects
-
-### 📊 Advanced Analytics
-- **Image Analysis**: Upload and analyze product images for defects
-- **Sensor Monitoring**: Real-time sensor data analysis
-- **Performance Metrics**: Detailed model performance insights
-- **Data Visualization**: Interactive charts and graphs
 
 ## 🏗️ Architecture
 
-### Backend (Python/FastAPI)
-- **Framework**: FastAPI with automatic API documentation
-- **AI Models**: 
-  - CNN (MobileNetV2) for image classification
-  - LSTM Autoencoder for sensor anomaly detection
-- **Deployment**: Docker containerized
-- **Port**: 8001
+- **Frontend**: Next.js 14 with TypeScript and Tailwind CSS
+- **Backend**: FastAPI with Python 3.9
+- **AI Models**: TensorFlow 2.13.0 (CNN + LSTM)
+- **Deployment**: Docker + Vercel
 
-### Frontend (Next.js/React)
-- **Framework**: Next.js 14 with TypeScript
-- **Styling**: Tailwind CSS with custom components
-- **Charts**: Recharts for data visualization
-- **UI Components**: Radix UI for professional components
-- **Port**: 3000
+## 📦 Quick Start
 
-## 📁 Project Structure
+### Backend (Docker)
 
-```
-Smart_factory_ai/
-├── scripts/
-│   ├── backend_api.py          # FastAPI backend server
-│   ├── train_cnn.py            # CNN model training
-│   ├── train_lstm_autoencoder.py # LSTM model training
-│   └── ...                     # Other utility scripts
-├── smart-factory-frontend/
-│   ├── app/                    # Next.js app directory
-│   ├── components/             # React components
-│   ├── lib/                    # Utility functions
-│   └── ...                     # Frontend files
-├── models/                     # Trained AI models
-├── dataset/                    # Training data
-├── data/                       # Sensor data
-├── test_images/                # Sample images for testing
-├── Dockerfile                  # Docker configuration
-└── requirements.txt            # Python dependencies
+```bash
+# Build and run with Docker Compose
+docker-compose up --build
+
+# Or build manually
+docker build -t smart-factory-backend .
+docker run -p 8001:8001 smart-factory-backend
 ```
 
-## 🚀 Quick Start
+### Frontend (Development)
+
+```bash
+cd smart-factory-frontend
+npm install
+npm run dev
+```
+
+## 🌐 Deployment
+
+### Backend Deployment
+
+1. **Docker Hub** (Recommended):
+   ```bash
+   docker build -t yourusername/smart-factory-backend .
+   docker push yourusername/smart-factory-backend
+   ```
+
+2. **Railway/Render/Heroku**:
+   - Connect your GitHub repository
+   - Set environment variables
+   - Deploy automatically
+
+### Frontend Deployment
+
+1. **Vercel** (Recommended):
+   ```bash
+   cd smart-factory-frontend
+   vercel --prod
+   ```
+
+2. **Set Environment Variables**:
+   - `NEXT_PUBLIC_API_URL`: Your backend API URL
+
+## 🔧 Environment Variables
+
+### Backend
+- `PORT`: Server port (default: 8001)
+- `IMG_MODEL_PATH`: Path to CNN model
+- `SENSOR_MODEL_PATH`: Path to LSTM model
+- `SCALER_PATH`: Path to scaler file
+- `WINDOW_SIZE`: LSTM window size
+- `ANOMALY_THRESHOLD`: Anomaly detection threshold
+
+### Frontend
+- `NEXT_PUBLIC_API_URL`: Backend API URL
+
+## 📊 API Endpoints
+
+- `POST /predict-image/`: Image quality analysis
+- `POST /predict-sensor/`: Sensor anomaly detection
+
+## 🛠️ Development
 
 ### Prerequisites
 - Python 3.9+
 - Node.js 18+
-- Docker (optional)
+- Docker (for deployment)
 
-### Backend Setup
+### Local Development
 ```bash
-# Install Python dependencies
+# Backend
 pip install -r requirements.txt
-
-# Run backend server
 python scripts/backend_api.py
-```
 
-### Frontend Setup
-```bash
-# Navigate to frontend directory
+# Frontend
 cd smart-factory-frontend
-
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
 ```
 
-### Docker Deployment
-```bash
-# Build and run with Docker
-docker build -t smart-factory-ai .
-docker run -p 8001:8001 smart-factory-ai
-```
+## 📈 Performance
 
-## 🧠 AI Models
-
-### CNN Image Classification
-- **Architecture**: MobileNetV2 with custom head
-- **Training Data**: 50,000+ augmented images
-- **Accuracy**: 98.2% on test set
-- **Use Case**: Defect detection in manufacturing
-
-### LSTM Anomaly Detection
-- **Architecture**: LSTM Autoencoder
-- **Training Data**: 10,000+ sensor sequences
-- **Accuracy**: 96.7% anomaly detection
-- **Use Case**: Predictive maintenance
-
-## 📊 API Endpoints
-
-### Image Analysis
-```
-POST /predict-image/
-Content-Type: multipart/form-data
-Body: image file
-Response: {"label": "Good/Defective", "confidence": 0.982}
-```
-
-### Sensor Analytics
-```
-POST /predict-sensor/
-Content-Type: application/json
-Body: {"vibration": 0.5, "temp": 25.0, "pressure": 1.2}
-Response: {"anomaly": false, "reconstruction_error": 0.0001}
-```
-
-## 🎯 Use Cases
-
-### Manufacturing Quality Control
-- Automated defect detection in production lines
-- Real-time quality monitoring
-- Reduced manual inspection costs
-
-### Predictive Maintenance
-- Equipment health monitoring
-- Anomaly detection in sensor data
-- Preventative maintenance scheduling
-
-### Industrial IoT
-- Sensor data analysis
-- Real-time monitoring dashboards
-- Data-driven decision making
-
-## 🛠️ Technologies Used
-
-### Backend
-- **Python 3.9**
-- **FastAPI** - Modern web framework
-- **TensorFlow 2.13** - Deep learning
-- **Scikit-learn** - Machine learning utilities
-- **Pillow** - Image processing
-- **Uvicorn** - ASGI server
-
-### Frontend
-- **Next.js 14** - React framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Utility-first CSS
-- **Radix UI** - Accessible components
-- **Recharts** - Data visualization
-- **Axios** - HTTP client
-
-### DevOps
-- **Docker** - Containerization
-- **Git** - Version control
-- **Vercel** - Frontend hosting
-- **Railway** - Backend hosting
-
-## 📈 Performance Metrics
-
-- **Image Processing**: < 1 second inference time
-- **Sensor Analysis**: < 500ms response time
-- **Model Accuracy**: 98.2% (CNN), 96.7% (LSTM)
+- **Image Analysis**: 98.2% accuracy on test dataset
+- **Sensor Detection**: 96.7% anomaly detection accuracy
+- **Inference Time**: < 1 second per prediction
 - **Training Data**: 50,000+ images, 10,000+ sensor sequences
 
-## 🔧 Development
+## 🔒 Security
 
-### Adding New Features
-1. Backend changes require Docker rebuild
-2. Frontend changes deploy automatically
-3. API endpoints documented with FastAPI
-
-### Testing
-- Test images available in `test_images/`
-- Sensor data simulation in `scripts/`
-- API documentation at `/docs` when running
+- Non-root Docker containers
+- CORS enabled for frontend communication
+- Environment variable configuration
+- Input validation and error handling
 
 ## 📝 License
 
-This project is developed for educational and portfolio purposes.
-
-## 👨‍💻 Author
-
-Built with advanced AI/ML expertise and modern full-stack development skills.
-
----
-
-**Ready for production deployment and enterprise use!** 🚀 
+MIT License - see LICENSE file for details 
