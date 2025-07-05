@@ -184,7 +184,7 @@ export function SensorMonitoring() {
             <Button 
               variant="outline" 
               onClick={resetAnalysis}
-              className="border-white/30 text-white hover:bg-white/10 px-8 py-3 rounded-xl"
+              className="bg-white text-emerald-700 border-2 border-emerald-400 hover:bg-emerald-100 px-8 py-3 rounded-xl font-semibold shadow-md transition-all duration-300"
             >
               Reset
             </Button>
@@ -204,11 +204,11 @@ export function SensorMonitoring() {
 
       {/* Results */}
       {result && (
-        <Card className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-green-400/30 shadow-2xl">
-          <CardHeader className="bg-gradient-to-r from-green-500/20 to-emerald-500/20">
-            <CardTitle className="flex items-center gap-3 text-white">
+        <Card className={`shadow-2xl ${result.anomaly ? 'bg-black/30 backdrop-blur-lg border border-purple-400/40' : 'bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-green-400/30'}`}>
+          <CardHeader className={`${result.anomaly ? 'bg-black/40' : 'bg-gradient-to-r from-green-500/20 to-emerald-500/20'}`}>
+            <CardTitle className={`flex items-center gap-3 ${result.anomaly ? 'text-white' : 'text-white'}`}>
               {getStatusIcon(result.anomaly)}
-              <span className={getStatusColor(result.anomaly)}>
+              <span className={result.anomaly ? 'text-white' : getStatusColor(result.anomaly)}>
                 {result.anomaly ? '🚨 Anomaly Detected' : '✅ Normal Operation'}
               </span>
             </CardTitle>
@@ -216,30 +216,30 @@ export function SensorMonitoring() {
           <CardContent className="p-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
-                <h4 className="text-xl font-bold text-white mb-4">Current Sensor Reading</h4>
+                <h4 className={`text-xl font-bold mb-4 ${result.anomaly ? 'text-white' : 'text-white'}`}>Current Sensor Reading</h4>
                 <div className="space-y-4 text-sm">
-                  <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/20">
-                    <span className="text-blue-200">Vibration:</span>
-                    <span className="font-mono text-white font-semibold">{sensorData.vibration.toFixed(3)}</span>
+                  <div className={`flex justify-between items-center p-3 rounded-lg border border-white/20 ${result.anomaly ? 'bg-black/20 text-white' : 'bg-white/5 text-white'}`}> 
+                    <span className={`${result.anomaly ? 'text-white' : 'text-blue-200'}`}>Vibration:</span>
+                    <span className={`font-mono font-semibold ${result.anomaly ? 'text-white' : 'text-white'}`}>{sensorData.vibration.toFixed(3)}</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/20">
-                    <span className="text-blue-200">Temperature:</span>
-                    <span className="font-mono text-white font-semibold">{sensorData.temp.toFixed(1)}°C</span>
+                  <div className={`flex justify-between items-center p-3 rounded-lg border border-white/20 ${result.anomaly ? 'bg-black/20 text-white' : 'bg-white/5 text-white'}`}> 
+                    <span className={`${result.anomaly ? 'text-white' : 'text-blue-200'}`}>Temperature:</span>
+                    <span className={`font-mono font-semibold ${result.anomaly ? 'text-white' : 'text-white'}`}>{sensorData.temp.toFixed(1)}°C</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/20">
-                    <span className="text-blue-200">Pressure:</span>
-                    <span className="font-mono text-white font-semibold">{sensorData.pressure.toFixed(2)} bar</span>
+                  <div className={`flex justify-between items-center p-3 rounded-lg border border-white/20 ${result.anomaly ? 'bg-black/20 text-white' : 'bg-white/5 text-white'}`}> 
+                    <span className={`${result.anomaly ? 'text-white' : 'text-blue-200'}`}>Pressure:</span>
+                    <span className={`font-mono font-semibold ${result.anomaly ? 'text-white' : 'text-white'}`}>{sensorData.pressure.toFixed(2)} bar</span>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/20">
-                    <span className="text-blue-200">Reconstruction Error:</span>
-                    <span className="font-mono text-white font-semibold">{result.reconstruction_error.toFixed(6)}</span>
+                  <div className={`flex justify-between items-center p-3 rounded-lg border border-white/20 ${result.anomaly ? 'bg-black/20 text-white' : 'bg-white/5 text-white'}`}> 
+                    <span className={`${result.anomaly ? 'text-white' : 'text-blue-200'}`}>Reconstruction Error:</span>
+                    <span className={`font-mono font-semibold ${result.anomaly ? 'text-white' : 'text-white'}`}>{result.reconstruction_error.toFixed(6)}</span>
                   </div>
                 </div>
               </div>
               
               <div>
-                <h4 className="text-xl font-bold text-white mb-4">AI Analysis Status</h4>
-                <div className={`text-2xl font-bold ${getStatusColor(result.anomaly)} mb-4`}>
+                <h4 className={`text-xl font-bold mb-4 ${result.anomaly ? 'text-white' : 'text-white'}`}>AI Analysis Status</h4>
+                <div className={`text-2xl font-bold mb-4 ${result.anomaly ? 'text-white' : getStatusColor(result.anomaly)}`}>
                   {result.anomaly ? (
                     <div className="flex items-center gap-3">
                       <AlertTriangle className="h-8 w-8" />
@@ -253,24 +253,24 @@ export function SensorMonitoring() {
                   )}
                 </div>
                 
-                <div className="bg-white/5 rounded-xl p-4 border border-white/20">
-                  <h5 className="text-lg font-semibold text-white mb-3">LSTM AI Details</h5>
+                <div className={`rounded-xl p-4 border border-white/20 ${result.anomaly ? 'bg-black/20 text-white' : 'bg-white/5 text-white'}`}> 
+                  <h5 className={`text-lg font-semibold mb-3 ${result.anomaly ? 'text-white' : 'text-white'}`}>LSTM AI Details</h5>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-blue-200">Model Used:</span>
-                      <span className="text-white font-semibold">LSTM Autoencoder</span>
+                      <span className={`${result.anomaly ? 'text-white' : 'text-blue-200'}`}>Model Used:</span>
+                      <span className={`font-semibold ${result.anomaly ? 'text-white' : 'text-white'}`}>LSTM Autoencoder</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-blue-200">Training Data:</span>
-                      <span className="text-white font-semibold">10,000+ Sequences</span>
+                      <span className={`${result.anomaly ? 'text-white' : 'text-blue-200'}`}>Training Data:</span>
+                      <span className={`font-semibold ${result.anomaly ? 'text-white' : 'text-white'}`}>10,000+ Sequences</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-blue-200">Inference Time:</span>
-                      <span className="text-white font-semibold">&lt; 500ms</span>
+                      <span className={`${result.anomaly ? 'text-white' : 'text-blue-200'}`}>Inference Time:</span>
+                      <span className={`font-semibold ${result.anomaly ? 'text-white' : 'text-white'}`}>&lt; 500ms</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-blue-200">Model Accuracy:</span>
-                      <span className="text-white font-semibold">96.7%</span>
+                      <span className={`${result.anomaly ? 'text-white' : 'text-blue-200'}`}>Model Accuracy:</span>
+                      <span className={`font-semibold ${result.anomaly ? 'text-white' : 'text-white'}`}>96.7%</span>
                     </div>
                   </div>
                 </div>
@@ -280,17 +280,17 @@ export function SensorMonitoring() {
             {/* Sensor History Chart */}
             {sensorHistory.length > 0 && (
               <div className="mt-8">
-                <h4 className="text-xl font-bold text-white mb-4">Sensor History Trend</h4>
-                <div className="bg-white/5 rounded-xl p-4 border border-white/20">
+                <h4 className={`text-xl font-bold mb-4 ${result.anomaly ? 'text-white' : 'text-white'}`}>Sensor History Trend</h4>
+                <div className={`rounded-xl p-4 border border-white/20 ${result.anomaly ? 'bg-black/20' : 'bg-white/5'}`}>
                   <ResponsiveContainer width="100%" height={200}>
                     <LineChart data={sensorHistory}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                      <CartesianGrid strokeDasharray="3 3" stroke={result.anomaly ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.1)'} />
                       <XAxis 
                         dataKey="timestamp" 
-                        stroke="rgba(255,255,255,0.7)" 
+                        stroke={result.anomaly ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.7)'} 
                         fontSize={12}
                       />
-                      <YAxis stroke="rgba(255,255,255,0.7)" fontSize={12} />
+                      <YAxis stroke={result.anomaly ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.7)'} fontSize={12} />
                       <Tooltip 
                         contentStyle={{ 
                           backgroundColor: 'rgba(0,0,0,0.8)', 
