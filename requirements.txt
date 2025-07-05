@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+numpy
+tensorflow==2.13.0
+pillow
+python-dotenv
+scikit-learn
+python-multipart 
